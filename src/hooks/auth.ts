@@ -16,8 +16,6 @@ export default function useAuth({
 } = {}) {
   const router = useRouter();
 
-  console.log(middleware, redirectIfAuthenticated);
-
   const {
     data: user,
     mutate,
@@ -31,7 +29,10 @@ export default function useAuth({
   // TODO: Implement csrf validation later.
   // const csrf = () => axios.get("/");
 
-  const login = async (email: string, token: string) => {
+  const login = async (
+      email: string,
+      // token: string
+  ) => {
     // csrf();
 
     try {
@@ -62,7 +63,7 @@ export default function useAuth({
       const res = await axios.get("/public/api/v1.0/Auth/Signin", {
         params: {
           email,
-          // token,
+          password
         },
       });
 
@@ -87,6 +88,7 @@ export default function useAuth({
     if (middleware === "guest" && redirectIfAuthenticated && user)
       router.push(redirectIfAuthenticated);
     if (middleware === "auth" && error) logout();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, error]);
 
   return {
