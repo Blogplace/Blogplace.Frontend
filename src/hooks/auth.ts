@@ -29,21 +29,19 @@ export default function useAuth({
   // TODO: Implement csrf validation later.
   // const csrf = () => axios.get("/");
 
-  const login = async (
-      email: string,
-      // token: string
-  ) => {
+  const login = async (email: string, token: string) => {
     // csrf();
 
     try {
       const res = await axios.get("/public/api/v1.0/Auth/Signin", {
         params: {
           email,
-          // token,
+          token,
         },
       });
 
-      console.log(res.data);
+      console.log(email, token);
+      console.log(res);
     } catch (error) {
       if (!(error instanceof AxiosError)) return;
 
@@ -63,7 +61,7 @@ export default function useAuth({
       const res = await axios.get("/public/api/v1.0/Auth/Signin", {
         params: {
           email,
-          password
+          password,
         },
       });
 
