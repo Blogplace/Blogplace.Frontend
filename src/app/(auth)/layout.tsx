@@ -5,7 +5,7 @@ import Footer from "@/components/footer";
 import useAuth from "@/hooks/auth";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth({
+  useAuth({
     middleware: "guest",
     redirectIfAuthenticated: "/",
   });
